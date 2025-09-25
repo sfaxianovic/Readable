@@ -1,0 +1,287 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  color: #111;
+  background: #f5f5f8;
+
+  overflow-x: hidden;
+}
+
+.popup {
+  padding: 1.5rem 1.75rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.popup__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.popup__title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.popup__subtitle {
+  margin: 0;
+  color: #3c3c3c;
+  font-size: 0.98rem;
+}
+
+.popup__section {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.2rem 1.15rem;
+  box-shadow: 0 10px 26px rgba(16, 24, 40, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.popup__section--toggle {
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+
+.popup__section--footer {
+  gap: 0.75rem;
+}
+
+.popup__section-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.status {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #3a3a3a;
+}
+
+.toggle,
+.reset,
+.ghost-button,
+.icon-button {
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.toggle {
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 0.75rem 1.4rem;
+  border-radius: 999px;
+  background: #111;
+  color: #f7f7f7;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.toggle--active {
+  background: #2f2f2f;
+}
+
+.reset {
+  align-self: flex-start;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  color: #333;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  background: transparent;
+}
+
+.ghost-button {
+  align-self: flex-start;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 0.5rem 0.9rem;
+  border-radius: 10px;
+  background: rgba(17, 17, 17, 0.05);
+  color: #222;
+}
+
+.ghost-button--danger {
+  color: #b3261e;
+  background: rgba(179, 38, 30, 0.08);
+}
+
+.icon-button {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: rgba(17, 17, 17, 0.08);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-actions {
+  display: inline-flex;
+  gap: 0.4rem;
+}
+
+.profile-selector {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.profile-utilities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.95rem;
+}
+
+.field span {
+  font-weight: 600;
+}
+
+.field select {
+  width: 100%;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.65rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #fff;
+}
+
+.control {
+  display: grid;
+  grid-template-columns: minmax(8rem, 1fr) 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.control--compact {
+  grid-template-columns: minmax(7rem, 0.9fr) 1fr auto;
+}
+
+.control__label {
+  font-weight: 600;
+}
+
+.control output {
+  font-variant-numeric: tabular-nums;
+  min-width: 5ch;
+  text-align: right;
+}
+
+input[type='range'] {
+  width: 100%;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.toggle-row input[type='checkbox'] {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: #111;
+}
+
+.feature-group {
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 12px;
+  padding: 0.75rem 0.75rem 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.feature-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding-left: 1.5rem;
+}
+
+.sync-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.toggle:hover,
+.reset:hover,
+.ghost-button:hover,
+.icon-button:hover {
+  transform: translateY(-1px);
+}
+
+.toggle:focus-visible,
+.reset:focus-visible,
+.ghost-button:focus-visible,
+.icon-button:focus-visible,
+select:focus-visible,
+input[type='range']:focus-visible {
+  outline: 3px solid #4c6ef5;
+  outline-offset: 2px;
+}
+
+@media (max-width: 380px) {
+  html,
+  body {
+    width: min(360px, 100vw);
+    min-width: 0;
+  }
+  .popup {
+    padding: 1.25rem 1.25rem 2rem;
+  }
+  .control {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 0.45rem;
+  }
+  .control output {
+    text-align: left;
+  }
+  .profile-utilities {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .sync-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 340px) {
+  html,
+  body {
+    width: 100vw;
+  }
+}

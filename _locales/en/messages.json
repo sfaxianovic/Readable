@@ -1,0 +1,353 @@
+{
+  "extensionName": {
+    "message": "Readable — Accessibility Made Simple"
+  },
+  "extensionDescription": {
+    "message": "Improve readability with optimized contrast and brightness — built for everyone, including people with achromatopsia or low vision."
+  },
+  "appTitle": {
+    "message": "Readable"
+  },
+  "appSubtitle": {
+    "message": "Make every page clearer and easier to read."
+  },
+  "toggleLoading": {
+    "message": "Loading…"
+  },
+  "toggleGrantAccess": {
+    "message": "Grant site access"
+  },
+  "toggleNotAvailable": {
+    "message": "Not available"
+  },
+  "toggleTurnOn": {
+    "message": "Turn On"
+  },
+  "toggleTurnOff": {
+    "message": "Turn Off"
+  },
+  "statusPreparing": {
+    "message": "Preparing…"
+  },
+  "statusActive": {
+    "message": "Reader is active on this site."
+  },
+  "statusInactive": {
+    "message": "Reader is off."
+  },
+  "statusDeactivated": {
+    "message": "Reader deactivated."
+  },
+  "statusApplyingChanges": {
+    "message": "Applying changes…"
+  },
+  "statusNoActiveTab": {
+    "message": "Unable to detect active tab."
+  },
+  "statusIneligible": {
+    "message": "Reader cannot run on this page."
+  },
+  "statusUnavailable": {
+    "message": "Reader is unavailable on this page."
+  },
+  "statusGrantAccessPrompt": {
+    "message": "Click “Grant site access” so the reader can run on this page."
+  },
+  "statusUnsupportedPage": {
+    "message": "This page does not allow extensions to run reader mode."
+  },
+  "statusPermissionRequired": {
+    "message": "Allow this extension on the current site to enable the reader."
+  },
+  "statusDefaultProfileUpdated": {
+    "message": "Default profile updated."
+  },
+  "statusDefaultsUpdated": {
+    "message": "Global defaults updated."
+  },
+  "errorProfileSwitchFailed": {
+    "message": "Profile switch failed: $1"
+  },
+  "errorProfileCreateFailed": {
+    "message": "Create failed: $1"
+  },
+  "errorProfileDuplicateFailed": {
+    "message": "Duplicate failed: $1"
+  },
+  "errorProfileRenameFailed": {
+    "message": "Rename failed: $1"
+  },
+  "errorProfileDeleteFailed": {
+    "message": "Delete failed: $1"
+  },
+  "errorDefaultUpdateFailed": {
+    "message": "Default update failed: $1"
+  },
+  "errorApplyDefaultsFailed": {
+    "message": "Apply failed: $1"
+  },
+  "errorSettingsSaveFailed": {
+    "message": "Could not save: $1"
+  },
+  "errorToggleFailed": {
+    "message": "Toggle failed: $1"
+  },
+  "statusExported": {
+    "message": "Settings exported."
+  },
+  "statusImported": {
+    "message": "Settings imported."
+  },
+  "statusReset": {
+    "message": "Site settings reset."
+  },
+  "statusOnboardingTriggered": {
+    "message": "Onboarding overlay triggered."
+  },
+  "statusInlineFont": {
+    "message": "Font $1"
+  },
+  "statusInlineBrightness": {
+    "message": "Brightness $1"
+  },
+  "statusInlineContrast": {
+    "message": "Contrast $1"
+  },
+  "errorExportFailed": {
+    "message": "Export failed: $1"
+  },
+  "errorImportFailed": {
+    "message": "Import failed: $1"
+  },
+  "errorResetFailed": {
+    "message": "Reset failed: $1"
+  },
+  "errorExportUnavailable": {
+    "message": "Unable to export"
+  },
+  "errorNoActiveTab": {
+    "message": "No active tab."
+  },
+  "errorNoActiveTabToInject": {
+    "message": "No active tab to inject."
+  },
+  "errorShowOnboarding": {
+    "message": "Unable to show onboarding, see console."
+  },
+  "errorToggle": {
+    "message": "Unable to toggle reader. See console for details."
+  },
+  "errorExit": {
+    "message": "Unable to exit reader. See console for details."
+  },
+  "statusPopupOpened": {
+    "message": "Settings popup opened."
+  },
+  "statusActivated": {
+    "message": "Achromatopsia adjustments enabled."
+  },
+  "confirmApplyDefaults": {
+    "message": "Apply current settings to all sites by updating your global defaults?"
+  },
+  "confirmResetSite": {
+    "message": "Restore site-specific settings to the global defaults?"
+  },
+  "exportFileName": {
+    "message": "achromatopsia-settings.json"
+  },
+  "unitPixels": {
+    "message": "$1 px"
+  },
+  "unitPercent": {
+    "message": "$1%"
+  },
+  "unitEm": {
+    "message": "$1 em"
+  },
+  "profileSectionTitle": {
+    "message": "Profile"
+  },
+  "profileAddLabel": {
+    "message": "Add profile"
+  },
+  "profileAddTitle": {
+    "message": "New profile"
+  },
+  "profileDuplicateLabel": {
+    "message": "Duplicate profile"
+  },
+  "profileDuplicateTitle": {
+    "message": "Duplicate profile"
+  },
+  "activeProfileLabel": {
+    "message": "Active profile"
+  },
+  "profileNameFallback": {
+    "message": "Profile $1"
+  },
+  "profileDefaultName": {
+    "message": "Default"
+  },
+  "statusProfileDuplicated": {
+    "message": "Profile duplicated."
+  },
+  "statusProfileRenamed": {
+    "message": "Profile renamed."
+  },
+  "statusProfileRemoved": {
+    "message": "Profile removed."
+  },
+  "promptProfileName": {
+    "message": "New profile name"
+  },
+  "profilePromptPlaceholder": {
+    "message": "Profile"
+  },
+  "profileNewDefaultName": {
+    "message": "New profile"
+  },
+  "profileCopySuggestion": {
+    "message": "$1 copy"
+  },
+  "statusProfileCreated": {
+    "message": "Profile created."
+  },
+  "confirmDeleteProfile": {
+    "message": "Delete this profile? This action cannot be undone."
+  },
+  "profileRenameButton": {
+    "message": "Rename"
+  },
+  "profileDeleteButton": {
+    "message": "Delete"
+  },
+  "profileSetGlobalButton": {
+    "message": "Set as global default"
+  },
+  "readingSectionTitle": {
+    "message": "Reading preferences"
+  },
+  "fontSizeLabel": {
+    "message": "Font size"
+  },
+  "brightnessLabel": {
+    "message": "Brightness"
+  },
+  "contrastLabel": {
+    "message": "Contrast"
+  },
+  "typographySectionTitle": {
+    "message": "Typography"
+  },
+  "bodyFontLabel": {
+    "message": "Body font"
+  },
+  "headingFontLabel": {
+    "message": "Heading font"
+  },
+  "bodyFontOptionArial": {
+    "message": "Arial / Helvetica"
+  },
+  "bodyFontOptionVerdana": {
+    "message": "Verdana"
+  },
+  "bodyFontOptionTrebuchet": {
+    "message": "Trebuchet"
+  },
+  "bodyFontOptionSegoe": {
+    "message": "Segoe UI"
+  },
+  "bodyFontOptionRoboto": {
+    "message": "Roboto"
+  },
+  "bodyFontOptionGeorgia": {
+    "message": "Georgia"
+  },
+  "bodyFontOptionOpenDyslexic": {
+    "message": "Open Dyslexic"
+  },
+  "headingFontOptionInherit": {
+    "message": "Same as body"
+  },
+  "headingFontOptionArial": {
+    "message": "Arial"
+  },
+  "headingFontOptionSegoe": {
+    "message": "Segoe UI"
+  },
+  "headingFontOptionRoboto": {
+    "message": "Roboto"
+  },
+  "headingFontOptionGeorgia": {
+    "message": "Georgia"
+  },
+  "letterSpacingLabel": {
+    "message": "Letter spacing"
+  },
+  "lineHeightLabel": {
+    "message": "Line height"
+  },
+  "boldTextLabel": {
+    "message": "Use bolder text for headings and buttons"
+  },
+  "syncSectionTitle": {
+    "message": "Sync & backup"
+  },
+  "exportButton": {
+    "message": "Export JSON"
+  },
+  "importButton": {
+    "message": "Import JSON"
+  },
+  "applyDefaultsButton": {
+    "message": "Apply popup changes to all sites"
+  },
+  "resetButton": {
+    "message": "Reset site to global defaults"
+  },
+  "replayOnboardingButton": {
+    "message": "Show getting-started tips"
+  },
+  "toolbarToggleTitle": {
+    "message": "Toggle Achromatopsia Reader (Alt+Shift+A)"
+  },
+  "readerModeLabel": {
+    "message": "Reader Mode"
+  },
+  "exitReaderLabel": {
+    "message": "Exit Reader"
+  },
+  "toolbarSettings": {
+    "message": "Settings"
+  },
+  "toolbarRegionLabel": {
+    "message": "Achromatopsia controls"
+  },
+  "loadingApplying": {
+    "message": "Applying accessible view…"
+  },
+  "loadingDefault": {
+    "message": "Loading…"
+  },
+  "onboardingTitle": {
+    "message": "Achromatopsia Reader tips"
+  },
+  "onboardingIntro": {
+    "message": "Use the floating toolbar or popup to adjust fontsize, brightness, contrast, and more. The Reader Mode button toggles the experience on any page."
+  },
+  "onboardingTip1": {
+    "message": "Alt+Shift+A toggles the reader instantly."
+  },
+  "onboardingTip2": {
+    "message": "Profiles let you save different settings per site."
+  },
+  "onboardingTip3": {
+    "message": "Use the popup to enable image captions, color legends, and the reading mask."
+  },
+  "onboardingButton": {
+    "message": "Got it"
+  },
+  "onboardingCloseLabel": {
+    "message": "Close tips"
+  }
+}

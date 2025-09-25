@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" style="width:384px;min-width:384px;">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=384, initial-scale=1.0" />
+    <title>__MSG_appTitle__</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="popup">
+      <header class="popup__header">
+        <h1 class="popup__title" data-i18n-text="appTitle"></h1>
+        <p class="popup__subtitle" data-i18n-text="appSubtitle"></p>
+      </header>
+
+      <section class="popup__section popup__section--toggle">
+        <button id="toggleReader" type="button" class="toggle" data-i18n-text="toggleLoading"></button>
+        <p id="status" class="status" role="status" aria-live="polite" data-i18n-text="statusPreparing"></p>
+      </section>
+
+      <section class="popup__section" id="readingControls" aria-labelledby="readingHeading">
+        <h2 id="readingHeading" class="popup__section-title" data-i18n-text="readingSectionTitle"></h2>
+        <label class="control">
+          <span class="control__label" data-i18n-text="fontSizeLabel"></span>
+          <input id="fontSize" type="range" min="32" max="96" step="4" value="48" />
+          <output for="fontSize" id="fontSizeValue"></output>
+        </label>
+        <label class="control">
+          <span class="control__label" data-i18n-text="brightnessLabel"></span>
+          <input id="brightness" type="range" min="40" max="100" step="5" value="70" />
+          <output for="brightness" id="brightnessValue"></output>
+        </label>
+        <label class="control">
+          <span class="control__label" data-i18n-text="contrastLabel"></span>
+          <input id="contrast" type="range" min="100" max="200" step="5" value="150" />
+          <output for="contrast" id="contrastValue"></output>
+        </label>
+      </section>
+
+      <section class="popup__section" id="profileSection" aria-labelledby="profileHeading">
+        <div class="section-header">
+          <h2 id="profileHeading" class="popup__section-title" data-i18n-text="profileSectionTitle"></h2>
+          <div class="profile-actions">
+            <button id="profileAdd" type="button" class="icon-button" data-i18n-title="profileAddTitle" data-i18n-ariaLabel="profileAddLabel">+</button>
+            <button id="profileDuplicate" type="button" class="icon-button" data-i18n-title="profileDuplicateTitle" data-i18n-ariaLabel="profileDuplicateLabel">⧉</button>
+          </div>
+        </div>
+        <div class="profile-selector">
+          <label class="field">
+            <span data-i18n-text="activeProfileLabel"></span>
+            <select id="profileSelect"></select>
+          </label>
+        </div>
+        <div class="profile-utilities">
+          <button id="profileRename" type="button" class="ghost-button" data-i18n-text="profileRenameButton"></button>
+          <button id="profileDelete" type="button" class="ghost-button ghost-button--danger" data-i18n-text="profileDeleteButton"></button>
+          <button id="profileSetDefault" type="button" class="ghost-button" data-i18n-text="profileSetGlobalButton"></button>
+        </div>
+      </section>
+
+      <section class="popup__section" id="typographySection" aria-labelledby="typographyHeading">
+        <h2 id="typographyHeading" class="popup__section-title" data-i18n-text="typographySectionTitle"></h2>
+        <label class="field">
+          <span data-i18n-text="bodyFontLabel"></span>
+          <select id="bodyFont">
+            <option value="'Arial', 'Helvetica', sans-serif" data-i18n-text="bodyFontOptionArial"></option>
+            <option value="'Verdana', 'Geneva', sans-serif" data-i18n-text="bodyFontOptionVerdana"></option>
+            <option value="'Trebuchet MS', 'Helvetica', sans-serif" data-i18n-text="bodyFontOptionTrebuchet"></option>
+            <option value="'Segoe UI', 'Helvetica Neue', sans-serif" data-i18n-text="bodyFontOptionSegoe"></option>
+            <option value="'Roboto', 'Helvetica', sans-serif" data-i18n-text="bodyFontOptionRoboto"></option>
+            <option value="'Georgia', 'Times New Roman', serif" data-i18n-text="bodyFontOptionGeorgia"></option>
+            <option value="'Open Dyslexic', 'Arial', sans-serif" data-i18n-text="bodyFontOptionOpenDyslexic"></option>
+          </select>
+        </label>
+        <label class="field">
+          <span data-i18n-text="headingFontLabel"></span>
+          <select id="headingFont">
+            <option value="inherit" data-i18n-text="headingFontOptionInherit"></option>
+            <option value="'Arial', 'Helvetica', sans-serif" data-i18n-text="headingFontOptionArial"></option>
+            <option value="'Segoe UI', 'Helvetica Neue', sans-serif" data-i18n-text="headingFontOptionSegoe"></option>
+            <option value="'Roboto', 'Helvetica', sans-serif" data-i18n-text="headingFontOptionRoboto"></option>
+            <option value="'Georgia', 'Times New Roman', serif" data-i18n-text="headingFontOptionGeorgia"></option>
+          </select>
+        </label>
+        <label class="control">
+          <span class="control__label" data-i18n-text="letterSpacingLabel"></span>
+          <input id="letterSpacing" type="range" min="-2" max="30" step="1" value="2" />
+          <output for="letterSpacing" id="letterSpacingValue"></output>
+        </label>
+        <label class="control">
+          <span class="control__label" data-i18n-text="lineHeightLabel"></span>
+          <input id="lineHeight" type="range" min="120" max="240" step="5" value="160" />
+          <output for="lineHeight" id="lineHeightValue"></output>
+        </label>
+        <label class="toggle-row">
+          <input id="boldText" type="checkbox" />
+          <span data-i18n-text="boldTextLabel"></span>
+        </label>
+      </section>
+
+      <section class="popup__section" id="syncSection" aria-labelledby="syncHeading">
+        <h2 id="syncHeading" class="popup__section-title" data-i18n-text="syncSectionTitle"></h2>
+        <div class="sync-actions">
+          <button id="exportSettings" type="button" class="ghost-button" data-i18n-text="exportButton"></button>
+          <button id="importSettings" type="button" class="ghost-button" data-i18n-text="importButton"></button>
+          <button id="applyAsDefault" type="button" class="ghost-button" data-i18n-text="applyDefaultsButton"></button>
+        </div>
+      </section>
+
+      <section class="popup__section popup__section--footer">
+        <button id="reset" type="button" class="reset" data-i18n-text="resetButton"></button>
+        <button id="replayOnboarding" type="button" class="ghost-button" data-i18n-text="replayOnboardingButton"></button>
+      </section>
+    </main>
+
+    <input type="file" id="importFile" accept="application/json" hidden />
+    <script src="popup.js" type="module"></script>
+  </body>
+</html>

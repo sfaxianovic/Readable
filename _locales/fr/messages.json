@@ -1,0 +1,353 @@
+{
+  "extensionName": {
+    "message": "Readable — Accessibilité simplifiée"
+  },
+  "extensionDescription": {
+    "message": "Optimisez la lisibilité du web avec contraste et luminosité adaptés — pour tous, y compris les personnes achromates ou malvoyantes."
+  },
+  "appTitle": {
+    "message": "Readable"
+  },
+  "appSubtitle": {
+    "message": "Rendez chaque page plus claire et facile à lire."
+  },
+  "toggleLoading": {
+    "message": "Chargement…"
+  },
+  "toggleGrantAccess": {
+    "message": "Autoriser l’accès au site"
+  },
+  "toggleNotAvailable": {
+    "message": "Indisponible"
+  },
+  "toggleTurnOn": {
+    "message": "Activer"
+  },
+  "toggleTurnOff": {
+    "message": "Désactiver"
+  },
+  "statusPreparing": {
+    "message": "Préparation…"
+  },
+  "statusActive": {
+    "message": "Le lecteur est actif sur ce site."
+  },
+  "statusInactive": {
+    "message": "Le lecteur est désactivé."
+  },
+  "statusDeactivated": {
+    "message": "Lecteur désactivé."
+  },
+  "statusApplyingChanges": {
+    "message": "Application des modifications…"
+  },
+  "statusNoActiveTab": {
+    "message": "Impossible de détecter l’onglet actif."
+  },
+  "statusIneligible": {
+    "message": "Le lecteur ne peut pas fonctionner sur cette page."
+  },
+  "statusUnavailable": {
+    "message": "Le lecteur est indisponible sur cette page."
+  },
+  "statusGrantAccessPrompt": {
+    "message": "Cliquez sur \"Autoriser l’accès au site\" pour activer le lecteur sur cette page."
+  },
+  "statusUnsupportedPage": {
+    "message": "Cette page ne permet pas d’exécuter le mode lecture des extensions."
+  },
+  "statusPermissionRequired": {
+    "message": "Autorisez cette extension sur le site courant pour activer le lecteur."
+  },
+  "statusDefaultProfileUpdated": {
+    "message": "Profil par défaut mis à jour."
+  },
+  "statusDefaultsUpdated": {
+    "message": "Paramètres globaux mis à jour."
+  },
+  "errorProfileSwitchFailed": {
+    "message": "Échec du changement de profil : $1"
+  },
+  "errorProfileCreateFailed": {
+    "message": "Échec de la création : $1"
+  },
+  "errorProfileDuplicateFailed": {
+    "message": "Échec de la duplication : $1"
+  },
+  "errorProfileRenameFailed": {
+    "message": "Échec du renommage : $1"
+  },
+  "errorProfileDeleteFailed": {
+    "message": "Échec de la suppression : $1"
+  },
+  "errorDefaultUpdateFailed": {
+    "message": "Échec de la mise à jour du profil par défaut : $1"
+  },
+  "errorApplyDefaultsFailed": {
+    "message": "Échec de l’application : $1"
+  },
+  "errorSettingsSaveFailed": {
+    "message": "Impossible d’enregistrer : $1"
+  },
+  "errorToggleFailed": {
+    "message": "Échec de l’activation/désactivation : $1"
+  },
+  "statusExported": {
+    "message": "Paramètres exportés."
+  },
+  "statusImported": {
+    "message": "Paramètres importés."
+  },
+  "statusReset": {
+    "message": "Paramètres du site réinitialisés."
+  },
+  "statusOnboardingTriggered": {
+    "message": "Infobulle de démarrage affichée."
+  },
+  "statusInlineFont": {
+    "message": "Police $1"
+  },
+  "statusInlineBrightness": {
+    "message": "Luminosité $1"
+  },
+  "statusInlineContrast": {
+    "message": "Contraste $1"
+  },
+  "errorExportFailed": {
+    "message": "Échec de l’export : $1"
+  },
+  "errorImportFailed": {
+    "message": "Échec de l’import : $1"
+  },
+  "errorResetFailed": {
+    "message": "Échec de la réinitialisation : $1"
+  },
+  "errorExportUnavailable": {
+    "message": "Impossible d’exporter"
+  },
+  "errorNoActiveTab": {
+    "message": "Aucun onglet actif."
+  },
+  "errorNoActiveTabToInject": {
+    "message": "Aucun onglet actif pour l’injection."
+  },
+  "errorShowOnboarding": {
+    "message": "Impossible d’afficher le tutoriel, voir la console."
+  },
+  "errorToggle": {
+    "message": "Impossible d’activer ou désactiver le lecteur. Voir la console."
+  },
+  "errorExit": {
+    "message": "Impossible de quitter le lecteur. Voir la console."
+  },
+  "statusPopupOpened": {
+    "message": "Panneau de paramètres ouvert."
+  },
+  "statusActivated": {
+    "message": "Ajustements achromatopsie activés."
+  },
+  "confirmApplyDefaults": {
+    "message": "Appliquer les paramètres actuels à tous les sites en mettant à jour les valeurs globales ?"
+  },
+  "confirmResetSite": {
+    "message": "Restaurer les paramètres du site depuis les valeurs globales ?"
+  },
+  "exportFileName": {
+    "message": "achromatopsia-parametres.json"
+  },
+  "unitPixels": {
+    "message": "$1 px"
+  },
+  "unitPercent": {
+    "message": "$1 %"
+  },
+  "unitEm": {
+    "message": "$1 em"
+  },
+  "profileSectionTitle": {
+    "message": "Profil"
+  },
+  "profileAddLabel": {
+    "message": "Ajouter un profil"
+  },
+  "profileAddTitle": {
+    "message": "Nouveau profil"
+  },
+  "profileDuplicateLabel": {
+    "message": "Dupliquer le profil"
+  },
+  "profileDuplicateTitle": {
+    "message": "Dupliquer le profil"
+  },
+  "activeProfileLabel": {
+    "message": "Profil actif"
+  },
+  "profileNameFallback": {
+    "message": "Profil $1"
+  },
+  "profileDefaultName": {
+    "message": "Par défaut"
+  },
+  "statusProfileDuplicated": {
+    "message": "Profil dupliqué."
+  },
+  "statusProfileRenamed": {
+    "message": "Profil renommé."
+  },
+  "statusProfileRemoved": {
+    "message": "Profil supprimé."
+  },
+  "promptProfileName": {
+    "message": "Nom du nouveau profil"
+  },
+  "profilePromptPlaceholder": {
+    "message": "Profil"
+  },
+  "profileNewDefaultName": {
+    "message": "Nouveau profil"
+  },
+  "profileCopySuggestion": {
+    "message": "$1 (copie)"
+  },
+  "statusProfileCreated": {
+    "message": "Profil créé."
+  },
+  "confirmDeleteProfile": {
+    "message": "Supprimer ce profil ? Cette action est irréversible."
+  },
+  "profileRenameButton": {
+    "message": "Renommer"
+  },
+  "profileDeleteButton": {
+    "message": "Supprimer"
+  },
+  "profileSetGlobalButton": {
+    "message": "Définir comme valeur globale"
+  },
+  "readingSectionTitle": {
+    "message": "Préférences de lecture"
+  },
+  "fontSizeLabel": {
+    "message": "Taille de police"
+  },
+  "brightnessLabel": {
+    "message": "Luminosité"
+  },
+  "contrastLabel": {
+    "message": "Contraste"
+  },
+  "typographySectionTitle": {
+    "message": "Typographie"
+  },
+  "bodyFontLabel": {
+    "message": "Police du corps de texte"
+  },
+  "headingFontLabel": {
+    "message": "Police des titres"
+  },
+  "bodyFontOptionArial": {
+    "message": "Arial / Helvetica"
+  },
+  "bodyFontOptionVerdana": {
+    "message": "Verdana"
+  },
+  "bodyFontOptionTrebuchet": {
+    "message": "Trebuchet"
+  },
+  "bodyFontOptionSegoe": {
+    "message": "Segoe UI"
+  },
+  "bodyFontOptionRoboto": {
+    "message": "Roboto"
+  },
+  "bodyFontOptionGeorgia": {
+    "message": "Georgia"
+  },
+  "bodyFontOptionOpenDyslexic": {
+    "message": "Open Dyslexic"
+  },
+  "headingFontOptionInherit": {
+    "message": "Identique au corps"
+  },
+  "headingFontOptionArial": {
+    "message": "Arial"
+  },
+  "headingFontOptionSegoe": {
+    "message": "Segoe UI"
+  },
+  "headingFontOptionRoboto": {
+    "message": "Roboto"
+  },
+  "headingFontOptionGeorgia": {
+    "message": "Georgia"
+  },
+  "letterSpacingLabel": {
+    "message": "Espacement des lettres"
+  },
+  "lineHeightLabel": {
+    "message": "Interlignage"
+  },
+  "boldTextLabel": {
+    "message": "Utiliser un texte plus gras pour les titres et boutons"
+  },
+  "syncSectionTitle": {
+    "message": "Sync & sauvegarde"
+  },
+  "exportButton": {
+    "message": "Exporter (JSON)"
+  },
+  "importButton": {
+    "message": "Importer (JSON)"
+  },
+  "applyDefaultsButton": {
+    "message": "Appliquer les réglages du panneau à tous les sites"
+  },
+  "resetButton": {
+    "message": "Réinitialiser le site selon les valeurs globales"
+  },
+  "replayOnboardingButton": {
+    "message": "Afficher les conseils de prise en main"
+  },
+  "toolbarToggleTitle": {
+    "message": "Activer/Désactiver le Lecteur achromatopsie (Alt+Maj+A)"
+  },
+  "readerModeLabel": {
+    "message": "Mode lecture"
+  },
+  "exitReaderLabel": {
+    "message": "Quitter le lecteur"
+  },
+  "toolbarSettings": {
+    "message": "Paramètres"
+  },
+  "toolbarRegionLabel": {
+    "message": "Commandes du lecteur achromatopsie"
+  },
+  "loadingApplying": {
+    "message": "Application de l’affichage accessible…"
+  },
+  "loadingDefault": {
+    "message": "Chargement…"
+  },
+  "onboardingTitle": {
+    "message": "Astuces du Lecteur achromatopsie"
+  },
+  "onboardingIntro": {
+    "message": "Utilisez la barre flottante ou le panneau pour ajuster la taille, la luminosité et le contraste. Le bouton Mode lecture active l’expérience sur n’importe quelle page."
+  },
+  "onboardingTip1": {
+    "message": "Alt+Maj+A active ou désactive instantanément le lecteur."
+  },
+  "onboardingTip2": {
+    "message": "Les profils permettent d’enregistrer différents réglages par site."
+  },
+  "onboardingTip3": {
+    "message": "Le panneau permet d’activer les légendes d’images, les légendes de couleurs et le masque de lecture."
+  },
+  "onboardingButton": {
+    "message": "C’est compris"
+  },
+  "onboardingCloseLabel": {
+    "message": "Fermer les astuces"
+  }
+}
