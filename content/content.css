@@ -202,23 +202,30 @@ body.achromatopsia-adjusted.achromatopsia-images-enabled :where(img, [role="img"
 
 .achromatopsia-page-toggle {
   position: fixed;
-  top: 1rem;
+  top: 50%;
   right: 1rem;
+  transform: translateY(-50%);
   z-index: 2147483647;
-  font-family: var(--achroma-heading-font);
-  font-size: 1.1rem;
-  font-weight: var(--achroma-bold-weight);
-  padding: 0.5em 1em;
-  border-radius: 999px;
-  border: 1px solid var(--achroma-border-color);
-  background: var(--achroma-button-background);
-  color: var(--achroma-button-text);
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid #888;
+  background-color: #ffffff;
+  color: #000000;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .achromatopsia-page-toggle:hover {
-  background: var(--achroma-button-hover);
+  background-color: #f0f0f0;
+  transform: translateY(-50%) scale(1.05);
 }
 
 .achromatopsia-page-toggle:focus-visible {
@@ -330,8 +337,9 @@ body.achromatopsia-adjusted.achromatopsia-images-enabled :where(img, [role="img"
   }
 
   .achromatopsia-page-toggle {
-    top: auto;
-    bottom: 1rem;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
   }
 }
 

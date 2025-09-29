@@ -37,27 +37,6 @@
         </label>
       </section>
 
-      <section class="popup__section" id="profileSection" aria-labelledby="profileHeading">
-        <div class="section-header">
-          <h2 id="profileHeading" class="popup__section-title" data-i18n-text="profileSectionTitle"></h2>
-          <div class="profile-actions">
-            <button id="profileAdd" type="button" class="icon-button" data-i18n-title="profileAddTitle" data-i18n-ariaLabel="profileAddLabel">+</button>
-            <button id="profileDuplicate" type="button" class="icon-button" data-i18n-title="profileDuplicateTitle" data-i18n-ariaLabel="profileDuplicateLabel">⧉</button>
-          </div>
-        </div>
-        <div class="profile-selector">
-          <label class="field">
-            <span data-i18n-text="activeProfileLabel"></span>
-            <select id="profileSelect"></select>
-          </label>
-        </div>
-        <div class="profile-utilities">
-          <button id="profileRename" type="button" class="ghost-button" data-i18n-text="profileRenameButton"></button>
-          <button id="profileDelete" type="button" class="ghost-button ghost-button--danger" data-i18n-text="profileDeleteButton"></button>
-          <button id="profileSetDefault" type="button" class="ghost-button" data-i18n-text="profileSetGlobalButton"></button>
-        </div>
-      </section>
-
       <section class="popup__section" id="typographySection" aria-labelledby="typographyHeading">
         <h2 id="typographyHeading" class="popup__section-title" data-i18n-text="typographySectionTitle"></h2>
         <label class="field">
@@ -97,23 +76,7 @@
           <span data-i18n-text="boldTextLabel"></span>
         </label>
       </section>
-
-      <section class="popup__section" id="syncSection" aria-labelledby="syncHeading">
-        <h2 id="syncHeading" class="popup__section-title" data-i18n-text="syncSectionTitle"></h2>
-        <div class="sync-actions">
-          <button id="exportSettings" type="button" class="ghost-button" data-i18n-text="exportButton"></button>
-          <button id="importSettings" type="button" class="ghost-button" data-i18n-text="importButton"></button>
-          <button id="applyAsDefault" type="button" class="ghost-button" data-i18n-text="applyDefaultsButton"></button>
-        </div>
-      </section>
-
-      <section class="popup__section popup__section--footer">
-        <button id="reset" type="button" class="reset" data-i18n-text="resetButton"></button>
-        <button id="replayOnboarding" type="button" class="ghost-button" data-i18n-text="replayOnboardingButton"></button>
-      </section>
     </main>
-
-    <input type="file" id="importFile" accept="application/json" hidden />
     <script src="popup.js" type="module"></script>
   </body>
 </html>

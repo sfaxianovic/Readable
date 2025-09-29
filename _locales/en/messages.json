@@ -59,50 +59,11 @@
   "statusPermissionRequired": {
     "message": "Allow this extension on the current site to enable the reader."
   },
-  "statusDefaultProfileUpdated": {
-    "message": "Default profile updated."
-  },
-  "statusDefaultsUpdated": {
-    "message": "Global defaults updated."
-  },
-  "errorProfileSwitchFailed": {
-    "message": "Profile switch failed: $1"
-  },
-  "errorProfileCreateFailed": {
-    "message": "Create failed: $1"
-  },
-  "errorProfileDuplicateFailed": {
-    "message": "Duplicate failed: $1"
-  },
-  "errorProfileRenameFailed": {
-    "message": "Rename failed: $1"
-  },
-  "errorProfileDeleteFailed": {
-    "message": "Delete failed: $1"
-  },
-  "errorDefaultUpdateFailed": {
-    "message": "Default update failed: $1"
-  },
-  "errorApplyDefaultsFailed": {
-    "message": "Apply failed: $1"
-  },
   "errorSettingsSaveFailed": {
     "message": "Could not save: $1"
   },
   "errorToggleFailed": {
     "message": "Toggle failed: $1"
-  },
-  "statusExported": {
-    "message": "Settings exported."
-  },
-  "statusImported": {
-    "message": "Settings imported."
-  },
-  "statusReset": {
-    "message": "Site settings reset."
-  },
-  "statusOnboardingTriggered": {
-    "message": "Onboarding overlay triggered."
   },
   "statusInlineFont": {
     "message": "Font $1"
@@ -113,26 +74,11 @@
   "statusInlineContrast": {
     "message": "Contrast $1"
   },
-  "errorExportFailed": {
-    "message": "Export failed: $1"
-  },
-  "errorImportFailed": {
-    "message": "Import failed: $1"
-  },
-  "errorResetFailed": {
-    "message": "Reset failed: $1"
-  },
-  "errorExportUnavailable": {
-    "message": "Unable to export"
-  },
   "errorNoActiveTab": {
     "message": "No active tab."
   },
   "errorNoActiveTabToInject": {
     "message": "No active tab to inject."
-  },
-  "errorShowOnboarding": {
-    "message": "Unable to show onboarding, see console."
   },
   "errorToggle": {
     "message": "Unable to toggle reader. See console for details."
@@ -146,15 +92,6 @@
   "statusActivated": {
     "message": "Achromatopsia adjustments enabled."
   },
-  "confirmApplyDefaults": {
-    "message": "Apply current settings to all sites by updating your global defaults?"
-  },
-  "confirmResetSite": {
-    "message": "Restore site-specific settings to the global defaults?"
-  },
-  "exportFileName": {
-    "message": "achromatopsia-settings.json"
-  },
   "unitPixels": {
     "message": "$1 px"
   },
@@ -163,66 +100,6 @@
   },
   "unitEm": {
     "message": "$1 em"
-  },
-  "profileSectionTitle": {
-    "message": "Profile"
-  },
-  "profileAddLabel": {
-    "message": "Add profile"
-  },
-  "profileAddTitle": {
-    "message": "New profile"
-  },
-  "profileDuplicateLabel": {
-    "message": "Duplicate profile"
-  },
-  "profileDuplicateTitle": {
-    "message": "Duplicate profile"
-  },
-  "activeProfileLabel": {
-    "message": "Active profile"
-  },
-  "profileNameFallback": {
-    "message": "Profile $1"
-  },
-  "profileDefaultName": {
-    "message": "Default"
-  },
-  "statusProfileDuplicated": {
-    "message": "Profile duplicated."
-  },
-  "statusProfileRenamed": {
-    "message": "Profile renamed."
-  },
-  "statusProfileRemoved": {
-    "message": "Profile removed."
-  },
-  "promptProfileName": {
-    "message": "New profile name"
-  },
-  "profilePromptPlaceholder": {
-    "message": "Profile"
-  },
-  "profileNewDefaultName": {
-    "message": "New profile"
-  },
-  "profileCopySuggestion": {
-    "message": "$1 copy"
-  },
-  "statusProfileCreated": {
-    "message": "Profile created."
-  },
-  "confirmDeleteProfile": {
-    "message": "Delete this profile? This action cannot be undone."
-  },
-  "profileRenameButton": {
-    "message": "Rename"
-  },
-  "profileDeleteButton": {
-    "message": "Delete"
-  },
-  "profileSetGlobalButton": {
-    "message": "Set as global default"
   },
   "readingSectionTitle": {
     "message": "Reading preferences"
@@ -290,24 +167,6 @@
   "boldTextLabel": {
     "message": "Use bolder text for headings and buttons"
   },
-  "syncSectionTitle": {
-    "message": "Sync & backup"
-  },
-  "exportButton": {
-    "message": "Export JSON"
-  },
-  "importButton": {
-    "message": "Import JSON"
-  },
-  "applyDefaultsButton": {
-    "message": "Apply popup changes to all sites"
-  },
-  "resetButton": {
-    "message": "Reset site to global defaults"
-  },
-  "replayOnboardingButton": {
-    "message": "Show getting-started tips"
-  },
   "toolbarToggleTitle": {
     "message": "Toggle Achromatopsia Reader (Alt+Shift+A)"
   },
@@ -328,26 +187,5 @@
   },
   "loadingDefault": {
     "message": "Loading…"
-  },
-  "onboardingTitle": {
-    "message": "Achromatopsia Reader tips"
-  },
-  "onboardingIntro": {
-    "message": "Use the floating toolbar or popup to adjust fontsize, brightness, contrast, and more. The Reader Mode button toggles the experience on any page."
-  },
-  "onboardingTip1": {
-    "message": "Alt+Shift+A toggles the reader instantly."
-  },
-  "onboardingTip2": {
-    "message": "Profiles let you save different settings per site."
-  },
-  "onboardingTip3": {
-    "message": "Use the popup to enable image captions, color legends, and the reading mask."
-  },
-  "onboardingButton": {
-    "message": "Got it"
-  },
-  "onboardingCloseLabel": {
-    "message": "Close tips"
   }
 }

@@ -14,7 +14,7 @@
         }
       }
     } catch (error) {
-      console.warn('[AchromatopsiaReader] Unable to resolve i18n message', key, error);
+      // Silently ignore i18n errors - fallback will be used
     }
     if (Array.isArray(substitutions) && substitutions.length) {
       return substitutions.join(' ');
@@ -611,93 +611,6 @@
             });
           return true;
         }
-        case 'RESET_SETTINGS': {
-          this.resetToDefaults()
-            .then(() => respond({ ok: true, settings: this.settings }))
-            .catch((error) => {
-              console.error('[AchromatopsiaReader] Reset failed', error);
-              respond({ ok: false, error: error.message });
-            });
-          return true;
-        }
-        case 'GET_PROFILES': {
-          respond({
-            ok: true,
-            profiles: this.settings?.profiles || {},
-            order: this.settings?.profilesOrder || [],
-            activeProfileId: this.settings?.activeProfileId
-          });
-          return false;
-        }
-        case 'SET_ACTIVE_PROFILE': {
-          this.setActiveProfile(message.payload?.id)
-            .then(() => respond({ ok: true, activeProfileId: this.settings.activeProfileId }))
-            .catch((error) => {
-              console.error('[AchromatopsiaReader] Failed to set active profile', error);
-              respond({ ok: false, error: error.message });
-            });
-          return true;
-        }
-        case 'CREATE_PROFILE': {
-          this.createProfile(message.payload || {})
-            .then((profile) => respond({ ok: true, profile, profiles: this.settings.profiles, order: this.settings.profilesOrder }))
-            .catch((error) => {
-              console.error('[AchromatopsiaReader] Failed to create profile', error);
-              respond({ ok: false, error: error.message });
-            });
-          return true;
-        }
-        case 'UPDATE_PROFILE': {
-          const { id, changes } = message.payload || {};
-          this.updateProfile(id, changes)
-            .then((profile) => respond({ ok: true, profile }))
-            .catch((error) => {
-              console.error('[AchromatopsiaReader] Failed to update profile', error);
-              respond({ ok: false, error: error.message });
-            });
-          return true;
-        }
-        case 'DELETE_PROFILE': {
-          this.deleteProfile(message.payload?.id)
-            .then((profile) => respond({ ok: true, profile, profiles: this.settings.profiles, order: this.settings.profilesOrder }))
-            .catch((error) => {
-              console.error('[AchromatopsiaReader] Failed to delete profile', error);
-              respond({ ok: false, error: error.message });
-            });
-          return true;
-        }
-        case 'REORDER_PROFILES': {
-          this.reorderProfiles(message.payload?.order || [])
-            .then((order) => respond({ ok: true, order }))
-            .catch((error) => {
-              console.error('[AchromatopsiaReader] Failed to reorder profiles', error);
-              respond({ ok: false, error: error.message });
-            });
-          return true;
-        }
-        case 'EXPORT_SETTINGS': {
-          this.exportSettings()
-            .then((snapshot) => respond({ ok: true, snapshot }))
-            .catch((error) => {
-              console.error('[AchromatopsiaReader] Failed to export settings', error);
-              respond({ ok: false, error: error.message });
-            });
-          return true;
-        }
-        case 'IMPORT_SETTINGS': {
-          this.importSettings(message.payload || {})
-            .then((snapshot) => respond({ ok: true, snapshot }))
-            .catch((error) => {
-              console.error('[AchromatopsiaReader] Failed to import settings', error);
-              respond({ ok: false, error: error.message });
-            });
-          return true;
-        }
-        case 'SHOW_ONBOARDING': {
-          this.showOnboardingOverlay({ force: true });
-          respond({ ok: true });
-          return false;
-        }
         case 'OPEN_POPUP': {
           respond({ ok: true });
           return false;
@@ -741,156 +654,8 @@
       }
     }
 
-    async resetToDefaults() {
-      const fallbackRaw = cloneSettings(this.defaultSettings) || normalizeSettingsStructure();
-      const normalizedFallback = normalizeSettingsStructure(fallbackRaw);
-      const wasActive = this.isActive;
-      const shouldBeActive = Boolean(normalizedFallback.enabled);
 
-      await this.saveSettings(normalizedFallback, { scope: 'domain', replace: true });
-      this.profile = this.getActiveProfile();
 
-      if (wasActive && !shouldBeActive) {
-        await this.deactivateReader();
-        return;
-      }
-
-      if (!wasActive && shouldBeActive) {
-        await this.activateReader();
-        return;
-      }
-
-      if (this.isActive) {
-        this.applyAchromatopsiaStyles();
-        this.applyImageAdjustments();
-        this.updateColorLegend();
-        this.updateReadingMask();
-        this.updateInlineStatus();
-      }
-
-      this.updateToggleButton();
-    }
-
-    async setActiveProfile(profileId) {
-      if (!profileId || !this.settings?.profiles?.[profileId]) {
-        throw new Error('Profile not found');
-      }
-      await this.applySettingChanges({ activeProfileId: profileId });
-      this.profile = this.getActiveProfile();
-    }
-
-    async createProfile({ name, baseProfileId, overrides = {}, activate = false } = {}) {
-      const next = cloneSettings(this.settings);
-      const baseProfile = (baseProfileId && next.profiles?.[baseProfileId]) || this.profile || PROFILE_DEFAULTS;
-      const fallbackName = `Profile ${Object.keys(next.profiles || {}).length + 1}`;
-      const newProfile = normalizeProfile({
-        ...baseProfile,
-        ...overrides,
-        id: generateProfileId(),
-        name: name || fallbackName
-      });
-
-      if (!isPlainObject(next.profiles)) {
-        next.profiles = {};
-      }
-      next.profiles[newProfile.id] = newProfile;
-      if (!Array.isArray(next.profilesOrder)) {
-        next.profilesOrder = [];
-      }
-      if (!next.profilesOrder.includes(newProfile.id)) {
-        next.profilesOrder.push(newProfile.id);
-      }
-      if (activate) {
-        next.activeProfileId = newProfile.id;
-      }
-
-      const normalized = normalizeSettingsStructure(next);
-      await this.saveSettings(normalized, { replace: true });
-      this.profile = this.getActiveProfile();
-      return this.settings?.profiles?.[newProfile.id] || newProfile;
-    }
-
-    async updateProfile(profileId, changes = {}) {
-      if (!profileId || !this.settings?.profiles?.[profileId]) {
-        throw new Error('Profile not found');
-      }
-      const next = cloneSettings(this.settings);
-      const existing = next.profiles[profileId];
-      next.profiles[profileId] = normalizeProfile({ ...existing, ...changes, id: profileId }, profileId);
-      const normalized = normalizeSettingsStructure(next);
-      await this.saveSettings(normalized, { replace: true });
-      this.profile = this.getActiveProfile();
-      return this.settings?.profiles?.[profileId] || normalizeProfile(next.profiles[profileId], profileId);
-    }
-
-    async deleteProfile(profileId) {
-      const profiles = this.settings?.profiles || {};
-      if (!profiles[profileId]) {
-        throw new Error('Profile not found');
-      }
-      if (Object.keys(profiles).length <= 1) {
-        throw new Error('At least one profile must remain');
-      }
-      const next = cloneSettings(this.settings);
-      delete next.profiles[profileId];
-      next.profilesOrder = (next.profilesOrder || []).filter((id) => id !== profileId);
-      if (next.activeProfileId === profileId) {
-        next.activeProfileId = next.profilesOrder[0] || Object.keys(next.profiles)[0];
-      }
-      const normalized = normalizeSettingsStructure(next);
-      await this.saveSettings(normalized, { replace: true });
-      this.profile = this.getActiveProfile();
-      return this.profile;
-    }
-
-    async reorderProfiles(order = []) {
-      const filtered = order.filter((id) => this.settings?.profiles?.[id]);
-      const next = cloneSettings(this.settings);
-      const existingIds = new Set(filtered);
-      (next.profilesOrder || []).forEach((id) => {
-        if (!existingIds.has(id) && next.profiles?.[id]) {
-          filtered.push(id);
-        }
-      });
-      next.profilesOrder = filtered;
-      if (!next.profiles?.[next.activeProfileId]) {
-        next.activeProfileId = filtered[0] || Object.keys(next.profiles || {})[0];
-      }
-      const normalized = normalizeSettingsStructure(next);
-      await this.saveSettings(normalized, { replace: true });
-      this.profile = this.getActiveProfile();
-      return normalized.profilesOrder;
-    }
-
-    getSettingsSnapshot() {
-      return {
-        domain: this.settings,
-        defaults: this.defaultSettings,
-        domainName: this.domain,
-        timestamp: Date.now(),
-        version: 1
-      };
-    }
-
-    async exportSettings() {
-      return this.getSettingsSnapshot();
-    }
-
-    async importSettings(payload = {}) {
-      const { domain, defaults, applyDomain = true, applyDefaults = false } = payload;
-      if (applyDefaults && defaults) {
-        await this.saveSettings(defaults, { scope: 'defaults', replace: true });
-      }
-      if (applyDomain && domain) {
-        await this.saveSettings(domain, { replace: true });
-      }
-      this.profile = this.getActiveProfile();
-      if (this.isActive) {
-        this.applyAchromatopsiaStyles();
-        this.updateInlineStatus();
-      }
-      return this.getSettingsSnapshot();
-    }
 
     injectToggleButton() {
       if (document.querySelector('.achromatopsia-page-toggle')) {
@@ -900,9 +665,11 @@
       button.type = 'button';
       button.className = 'achromatopsia-page-toggle';
       button.setAttribute('aria-pressed', String(this.settings.enabled));
-      button.title = t('toolbarToggleTitle', null, 'Toggle Achromatopsia Reader (Alt+Shift+A)');
+      button.setAttribute('aria-label', this.settings.enabled ? t('exitReaderLabel', null, 'Exit Reader') : t('readerModeLabel', null, 'Reader Mode'));
+      button.title = this.settings.enabled ? t('exitReaderLabel', null, 'Exit Reader') : t('readerModeLabel', null, 'Reader Mode');
       button.lang = getUILanguage();
-      button.textContent = this.settings.enabled ? t('exitReaderLabel', null, 'Exit Reader') : t('readerModeLabel', null, 'Reader Mode');
+      button.textContent = 'R';
+
       button.addEventListener('click', () => {
         this.toggleReader(!this.isActive).catch((error) => {
           console.error('[AchromatopsiaReader] Toggle via button failed', error);
@@ -917,7 +684,9 @@
       if (!this.toggleButton) {
         return;
       }
-      this.toggleButton.textContent = this.isActive ? t('exitReaderLabel', null, 'Exit Reader') : t('readerModeLabel', null, 'Reader Mode');
+      const label = this.isActive ? t('exitReaderLabel', null, 'Exit Reader') : t('readerModeLabel', null, 'Reader Mode');
+      this.toggleButton.setAttribute('aria-label', label);
+      this.toggleButton.title = label;
       this.toggleButton.setAttribute('aria-pressed', String(this.isActive));
     }
 
@@ -1155,9 +924,6 @@
         this.updateReadingMask();
         this.setupAdaptiveMode();
         this.updateInlineStatus();
-        if (!this.settings?.onboarding?.completed) {
-          this.showOnboardingOverlay({ auto: true });
-        }
         this.isActive = true;
         this.lastErrorMessage = null;
         this.updateToggleButton();
@@ -1215,7 +981,6 @@
       this.removeColorLegend();
       this.clearImageAnnotations();
       this.disableReadingMask();
-      this.hideOnboardingOverlay();
       this.updateToggleButton();
       window.scrollTo({ top: this.originalScrollPosition, behavior: 'auto' });
       this.announceStatus(t('statusDeactivated', null, 'Reader deactivated.'));
@@ -1729,91 +1494,6 @@
       }, 200);
     }
 
-    showOnboardingOverlay({ auto = false, force = false } = {}) {
-      if (this.onboardingOverlay && !force) {
-        return;
-      }
-      if (!document.body) {
-        return;
-      }
-      if (this.onboardingOverlay) {
-        this.hideOnboardingOverlay();
-      }
-      const overlay = document.createElement('div');
-      overlay.className = 'achromatopsia-onboarding';
-      overlay.setAttribute('role', 'dialog');
-      overlay.setAttribute('aria-modal', 'true');
-      overlay.lang = getUILanguage();
-      const panel = document.createElement('div');
-      panel.className = 'achromatopsia-onboarding__panel';
-      const dismissButton = document.createElement('button');
-      dismissButton.type = 'button';
-      dismissButton.className = 'achromatopsia-onboarding__dismiss';
-      dismissButton.setAttribute('aria-label', t('onboardingCloseLabel', null, 'Close tips'));
-      dismissButton.innerHTML = '&times;';
-      dismissButton.addEventListener('click', () => this.hideOnboardingOverlay({ markComplete: true }));
-      const title = document.createElement('h2');
-      title.textContent = t('onboardingTitle', null, 'Achromatopsia Reader tips');
-      const intro = document.createElement('p');
-      intro.textContent = t(
-        'onboardingIntro',
-        null,
-        'Use the floating toolbar or popup to adjust fontsize, brightness, contrast, and more. The Reader Mode button toggles the experience on any page.'
-      );
-      const tipsList = document.createElement('ul');
-      tipsList.className = 'achromatopsia-onboarding__list';
-      [
-        t('onboardingTip1', null, 'Alt+Shift+A toggles the reader instantly.'),
-        t('onboardingTip2', null, 'Profiles let you save different settings per site.'),
-        t('onboardingTip3', null, 'Use the popup to enable image captions, color legends, and the reading mask.')
-      ].forEach((tip) => {
-        const item = document.createElement('li');
-        item.textContent = tip;
-        tipsList.appendChild(item);
-      });
-      const actions = document.createElement('div');
-      actions.className = 'achromatopsia-onboarding__actions';
-      const closeBtn = document.createElement('button');
-      closeBtn.type = 'button';
-      closeBtn.className = 'achromatopsia-onboarding__button';
-      closeBtn.textContent = t('onboardingButton', null, 'Got it');
-      closeBtn.addEventListener('click', () => this.hideOnboardingOverlay({ markComplete: true }));
-      actions.appendChild(closeBtn);
-      panel.append(dismissButton, title, intro, tipsList, actions);
-      overlay.appendChild(panel);
-      overlay.addEventListener('click', (event) => {
-        if (event.target === overlay) {
-          this.hideOnboardingOverlay({ markComplete: true });
-        }
-      });
-      document.addEventListener('keydown', this.boundHandleEscape, { passive: true });
-      document.body.appendChild(overlay);
-      this.onboardingOverlay = overlay;
-      closeBtn.focus({ preventScroll: true });
-    }
-
-    handleOnboardingKeydown(event) {
-      if (!this.onboardingOverlay) {
-        return;
-      }
-      const key = event?.key || event?.code;
-      if (key === 'Escape' || key === 'Esc') {
-        this.hideOnboardingOverlay({ markComplete: true });
-      }
-    }
-
-    hideOnboardingOverlay({ markComplete = false } = {}) {
-      if (this.onboardingOverlay?.parentElement) {
-        this.onboardingOverlay.parentElement.removeChild(this.onboardingOverlay);
-      }
-      this.onboardingOverlay = null;
-      document.removeEventListener('keydown', this.boundHandleEscape, { passive: true });
-      if (markComplete && !this.settings?.onboarding?.completed) {
-        this.saveSettings({ onboarding: { completed: true } }).catch((error) => {
-          console.warn('[AchromatopsiaReader] Unable to persist onboarding completion', error);
-        });
-      }
-    }
 
     announceStatus(message) {
       if (!message) {

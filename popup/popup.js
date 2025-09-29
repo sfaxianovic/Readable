@@ -129,13 +129,6 @@ function cacheElements() {
   elements.toggle = document.getElementById('toggleReader');
   elements.status = document.getElementById('status');
 
-  elements.profileSelect = document.getElementById('profileSelect');
-  elements.profileAdd = document.getElementById('profileAdd');
-  elements.profileDuplicate = document.getElementById('profileDuplicate');
-  elements.profileRename = document.getElementById('profileRename');
-  elements.profileDelete = document.getElementById('profileDelete');
-  elements.profileSetDefault = document.getElementById('profileSetDefault');
-
   elements.fontSize = document.getElementById('fontSize');
   elements.fontValue = document.getElementById('fontSizeValue');
   elements.brightness = document.getElementById('brightness');
@@ -170,24 +163,10 @@ function cacheElements() {
   elements.maskHeightValue = document.getElementById('maskHeightValue');
   elements.maskOpacity = document.getElementById('maskOpacity');
   elements.maskOpacityValue = document.getElementById('maskOpacityValue');
-
-  elements.exportSettings = document.getElementById('exportSettings');
-  elements.importSettings = document.getElementById('importSettings');
-  elements.applyAsDefault = document.getElementById('applyAsDefault');
-  elements.importFile = document.getElementById('importFile');
-
-  elements.reset = document.getElementById('reset');
-  elements.replayOnboarding = document.getElementById('replayOnboarding');
 }
 
 function attachEventListeners() {
   elements.toggle.addEventListener('click', onToggleClick);
-  elements.profileSelect.addEventListener('change', onProfileChange);
-  elements.profileAdd.addEventListener('click', onProfileAdd);
-  elements.profileDuplicate.addEventListener('click', onProfileDuplicate);
-  elements.profileRename.addEventListener('click', onProfileRename);
-  elements.profileDelete.addEventListener('click', onProfileDelete);
-  elements.profileSetDefault.addEventListener('click', onApplyProfileAsDefault);
 
   elements.fontSize.addEventListener('input', () => handleFontSize(parseInt(elements.fontSize.value, 10)));
   elements.brightness.addEventListener('input', () => handleBrightness(parseInt(elements.brightness.value, 10)));
@@ -246,14 +225,6 @@ function attachEventListeners() {
   if (elements.maskOpacity) {
     elements.maskOpacity.addEventListener('input', () => handleMaskOpacity(parseInt(elements.maskOpacity.value, 10)));
   }
-
-  elements.exportSettings.addEventListener('click', onExportSettings);
-  elements.importSettings.addEventListener('click', () => elements.importFile.click());
-  elements.applyAsDefault.addEventListener('click', onApplyAllSites);
-  elements.importFile.addEventListener('change', onImportFile);
-
-  elements.reset.addEventListener('click', onResetClick);
-  elements.replayOnboarding.addEventListener('click', onReplayOnboarding);
 }
 
 async function init() {
@@ -362,12 +333,6 @@ function disableControls(message, error) {
 function setControlsEnabled(enabled) {
   const disabled = !enabled;
   [
-    elements.profileSelect,
-    elements.profileAdd,
-    elements.profileDuplicate,
-    elements.profileRename,
-    elements.profileDelete,
-    elements.profileSetDefault,
     elements.fontSize,
     elements.brightness,
     elements.contrast,
@@ -385,12 +350,7 @@ function setControlsEnabled(enabled) {
     elements.legendStyle,
     elements.readingMaskToggle,
     elements.maskHeight,
-    elements.maskOpacity,
-    elements.exportSettings,
-    elements.importSettings,
-    elements.applyAsDefault,
-    elements.reset,
-    elements.replayOnboarding
+    elements.maskOpacity
   ].forEach((node) => {
     if (node) {
       node.disabled = disabled;
@@ -404,7 +364,6 @@ function updateStatus(message) {
 
 function renderUI() {
   renderToggle();
-  renderProfiles();
   renderProfileControls();
   renderFeatures();
 }
@@ -413,27 +372,6 @@ function renderToggle() {
   elements.toggle.disabled = false;
   elements.toggle.classList.toggle('toggle--active', state.active);
   elements.toggle.textContent = state.active ? t('toggleTurnOff') : t('toggleTurnOn');
-}
-
-function renderProfiles() {
-  const profiles = state.settings?.profiles || {};
-  const order = state.settings?.profilesOrder || [];
-  const activeId = state.settings?.activeProfileId;
-  elements.profileSelect.innerHTML = '';
-  order.forEach((id) => {
-    if (!profiles[id]) {
-      return;
-    }
-    const option = document.createElement('option');
-    option.value = id;
-    option.textContent = profiles[id].name || t('profileNameFallback', [id]);
-    if (id === activeId) {
-      option.selected = true;
-    }
-    elements.profileSelect.appendChild(option);
-  });
-
-  elements.profileDelete.disabled = Object.keys(profiles).length <= 1;
 }
 
 function getActiveProfile() {
@@ -642,234 +580,6 @@ async function onToggleClick() {
   }
 }
 
-async function onProfileChange() {
-  const id = elements.profileSelect.value;
-  if (!id || id === state.settings?.activeProfileId) {
-    return;
-  }
-  try {
-    const response = await sendMessageToContent({ type: 'SET_ACTIVE_PROFILE', payload: { id } });
-    if (response?.ok) {
-      await hydrateState();
-    } else if (response?.error) {
-      throw new Error(response.error);
-    }
-  } catch (error) {
-    console.error('[Popup] Failed to switch profile', error);
-    updateStatus(t('errorProfileSwitchFailed', [error.message]));
-  }
-}
-
-async function onProfileAdd() {
-  const name = window.prompt(t('promptProfileName'), t('profileNewDefaultName'));
-  if (!name) {
-    return;
-  }
-  try {
-    const response = await sendMessageToContent({
-      type: 'CREATE_PROFILE',
-      payload: { name: name.trim(), baseProfileId: state.settings.activeProfileId, activate: true }
-    });
-    if (response?.ok) {
-      await hydrateState();
-      updateStatus(t('statusProfileCreated'));
-    } else if (response?.error) {
-      throw new Error(response.error);
-    }
-  } catch (error) {
-    console.error('[Popup] Failed to create profile', error);
-    updateStatus(t('errorProfileCreateFailed', [error.message]));
-  }
-}
-
-async function onProfileDuplicate() {
-  const activeProfile = getActiveProfile();
-  if (!activeProfile) {
-    return;
-  }
-  const baseName = activeProfile.name || t('profilePromptPlaceholder');
-  const suggestion = t('profileCopySuggestion', [baseName]);
-  try {
-    const response = await sendMessageToContent({
-      type: 'CREATE_PROFILE',
-      payload: { name: suggestion, baseProfileId: state.settings.activeProfileId, activate: false }
-    });
-    if (response?.ok) {
-      await hydrateState();
-      updateStatus(t('statusProfileDuplicated'));
-    } else if (response?.error) {
-      throw new Error(response.error);
-    }
-  } catch (error) {
-    console.error('[Popup] Failed to duplicate profile', error);
-    updateStatus(t('errorProfileDuplicateFailed', [error.message]));
-  }
-}
-
-async function onProfileRename() {
-  const activeProfile = getActiveProfile();
-  if (!activeProfile) {
-    return;
-  }
-  const name = window.prompt(t('promptProfileName'), activeProfile.name || t('profilePromptPlaceholder'));
-  if (!name || name.trim() === activeProfile.name) {
-    return;
-  }
-  try {
-    const response = await sendMessageToContent({
-      type: 'UPDATE_PROFILE',
-      payload: { id: state.settings.activeProfileId, changes: { name: name.trim() } }
-    });
-    if (response?.ok) {
-      await hydrateState();
-      updateStatus(t('statusProfileRenamed'));
-    } else if (response?.error) {
-      throw new Error(response.error);
-    }
-  } catch (error) {
-    console.error('[Popup] Failed to rename profile', error);
-    updateStatus(t('errorProfileRenameFailed', [error.message]));
-  }
-}
-
-async function onProfileDelete() {
-  if (!window.confirm(t('confirmDeleteProfile'))) {
-    return;
-  }
-  try {
-    const response = await sendMessageToContent({
-      type: 'DELETE_PROFILE',
-      payload: { id: state.settings.activeProfileId }
-    });
-    if (response?.ok) {
-      await hydrateState();
-      updateStatus(t('statusProfileRemoved'));
-    } else if (response?.error) {
-      throw new Error(response.error);
-    }
-  } catch (error) {
-    console.error('[Popup] Failed to delete profile', error);
-    updateStatus(t('errorProfileDeleteFailed', [error.message]));
-  }
-}
-
-async function onApplyProfileAsDefault() {
-  const profile = getActiveProfile();
-  if (!profile) {
-    return;
-  }
-  const clone = deepClone(state.defaults || {});
-  clone.profiles = clone.profiles || {};
-  clone.profiles[state.settings.activeProfileId] = profile;
-  clone.activeProfileId = state.settings.activeProfileId;
-  clone.profilesOrder = Array.from(new Set([state.settings.activeProfileId, ...(clone.profilesOrder || [])]));
-  try {
-    const response = await sendMessageToContent({
-      type: 'UPDATE_SETTINGS',
-      payload: { updates: clone, scope: 'defaults', replace: true }
-    });
-    if (response?.ok) {
-      updateStatus(t('statusDefaultProfileUpdated'));
-    } else if (response?.error) {
-      throw new Error(response.error);
-    }
-  } catch (error) {
-    console.error('[Popup] Failed to apply default profile', error);
-    updateStatus(t('errorDefaultUpdateFailed', [error.message]));
-  }
-}
-
-async function onApplyAllSites() {
-  if (!window.confirm(t('confirmApplyDefaults'))) {
-    return;
-  }
-  try {
-    const response = await sendMessageToContent({
-      type: 'UPDATE_SETTINGS',
-      payload: { updates: state.settings, scope: 'defaults', replace: true }
-    });
-    if (response?.ok) {
-      updateStatus(t('statusDefaultsUpdated'));
-    } else if (response?.error) {
-      throw new Error(response.error);
-    }
-  } catch (error) {
-    console.error('[Popup] Failed to apply defaults', error);
-    updateStatus(t('errorApplyDefaultsFailed', [error.message]));
-  }
-}
-
-async function onExportSettings() {
-  try {
-    const response = await sendMessageToContent({ type: 'EXPORT_SETTINGS' });
-    if (!response?.ok) {
-      throw new Error(response?.error || t('errorExportUnavailable'));
-    }
-    const dataStr = JSON.stringify(response.snapshot, null, 2);
-    const blob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement('a');
-    anchor.href = url;
-    anchor.download = t('exportFileName');
-    anchor.click();
-    URL.revokeObjectURL(url);
-    updateStatus(t('statusExported'));
-  } catch (error) {
-    console.error('[Popup] Export failed', error);
-    updateStatus(t('errorExportFailed', [error.message]));
-  }
-}
-
-async function onImportFile(event) {
-  const file = event.target.files?.[0];
-  if (!file) {
-    return;
-  }
-  try {
-    const text = await file.text();
-    const payload = JSON.parse(text);
-    const response = await sendMessageToContent({ type: 'IMPORT_SETTINGS', payload });
-    if (response?.ok) {
-      await hydrateState();
-      updateStatus(t('statusImported'));
-    } else if (response?.error) {
-      throw new Error(response.error);
-    }
-  } catch (error) {
-    console.error('[Popup] Import failed', error);
-    updateStatus(t('errorImportFailed', [error.message]));
-  } finally {
-    elements.importFile.value = '';
-  }
-}
-
-async function onResetClick() {
-  if (!window.confirm(t('confirmResetSite'))) {
-    return;
-  }
-  try {
-    const response = await sendMessageToContent({ type: 'RESET_SETTINGS' });
-    if (response?.ok) {
-      await hydrateState();
-      updateStatus(t('statusReset'));
-    } else if (response?.error) {
-      throw new Error(response.error);
-    }
-  } catch (error) {
-    console.error('[Popup] Reset failed', error);
-    updateStatus(t('errorResetFailed', [error.message]));
-  }
-}
-
-async function onReplayOnboarding() {
-  try {
-    await sendMessageToContent({ type: 'SHOW_ONBOARDING' });
-    updateStatus(t('statusOnboardingTriggered'));
-  } catch (error) {
-    console.error('[Popup] Unable to show onboarding', error);
-    updateStatus(t('errorShowOnboarding'));
-  }
-}
 
 function sanitizeFontValue(value) {
   return value || "'Arial', 'Helvetica', sans-serif";
