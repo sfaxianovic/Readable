@@ -12,17 +12,6 @@ Readable is an accessibility extension designed to improve web readability for p
 
 All settings and preferences are stored locally on your device using Chrome's built-in storage API. No information ever leaves your computer.
 
-## Data Storage
-
-The extension stores the following data **locally on your device only**:
-
-- Visual preferences per website (font size, brightness, contrast levels)
-- Typography choices (font family, letter spacing, line height)
-- Feature toggles (image adjustments, reading mask, color legend)
-- Active/inactive state for each website
-
-**Important:** This data is stored exclusively on your device and is never transmitted to any server.
-
 ## Permissions Explained
 
 ### activeTab
@@ -34,11 +23,6 @@ The extension stores the following data **locally on your device only**:
 - **Purpose:** Identify which browser tab is currently active
 - **Usage:** Enable communication between the popup and the active page
 - **Data Access:** Tab URL and basic metadata only
-
-### storage
-- **Purpose:** Save your visual preferences locally
-- **Usage:** Remember your settings for each website you visit
-- **Data Access:** Stored locally on your device, never transmitted
 
 ### scripting
 - **Purpose:** Apply visual adjustments to webpages
@@ -57,13 +41,6 @@ Readable does **NOT** use any third-party services, including:
 - ❌ No advertisement networks
 - ❌ No external servers or APIs
 - ❌ No data transmission of any kind
-
-## Data Retention
-
-Your settings remain stored locally until you:
-- Manually clear browser data via Chrome settings
-- Uninstall the extension
-- Use Chrome's extension storage management
 
 ## User Control
 
@@ -95,8 +72,7 @@ This extension's source code is transparent and can be reviewed at any time. We 
 
 For questions, concerns, or requests regarding this privacy policy:
 
-**Email:** [Your Email Here]
-**GitHub:** [Your GitHub Repository URL - Optional]
+**GitHub:** (https://github.com/sfaxianovic/Readable)
 
 ## Compliance
 
